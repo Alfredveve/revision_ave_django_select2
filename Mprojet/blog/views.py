@@ -1,6 +1,22 @@
 from django.shortcuts import render
-from django.http import HttpResponse
+from .models import BlogArticles
+from .forms import BlogArticlesForm
+
 
 def index(request):
-    text = "<h1> Je suis heureux de coder avec django</h1>"
-    return HttpResponse(text)
+    blog = BlogArticles.objects.all()
+
+    context = {
+        'blogs': blog
+    }
+    return render(request, 'blog/index.html', context)
+
+
+def addBlog(request):
+    form = BlogArticlesForm(request.POST or None, request.FILES or None)
+    messages = ""
+    if request.method == 'POST' and form.is_valid():
+        form.save()
+        form = BlogArticlesForm()
+        messages = "We have receive successfully an item"
+    return render(request, 'blog/create.html')

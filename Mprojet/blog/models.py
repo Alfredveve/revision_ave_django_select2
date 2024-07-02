@@ -2,7 +2,7 @@ from django.db import models
 
 class BlogArticles(models.Model):
     title = models.CharField(max_length=100)
-    description = models.CharField(max_length=300)
+    description = models.TextField(max_length=300)
     image = models.ImageField(upload_to = 'images/', blank=True)
     datapub = models.DateTimeField()
     slug = models.SlugField(max_length=10)

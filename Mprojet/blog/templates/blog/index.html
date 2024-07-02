@@ -1,0 +1,31 @@
+{% extends "blog/base.html" %}
+
+{% block section %}
+<div class="row justify-content-center">
+    {% for blog in blogs %}
+    <div class="col-md-3 mb-4">
+        <div class="card h-100">
+            {% if blog.image %}
+            <img src="{{ blog.image.url }}" class="card-img-top" alt="{{ blog.title }}">
+            {% else %}
+            <h4>No image found here!</h4>
+            {% endif %}
+            <div class="card-body d-flex flex-column justify-content-between">
+                <div>
+                    <h5 class="card-title">{{ blog.title }}</h5>
+                    <p class="card-text">{{ blog.description }}</p>
+                </div>
+                <div>
+                    <h4>{{ blog.datapub }}</h4>
+                    <a href="#" class="btn btn-primary">Details</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% empty %}
+    <div class="col-12 text-center">
+        <h4>La base de donnée est vide!!</h4>
+    </div>
+    {% endfor %}
+</div>
+{% endblock %}
